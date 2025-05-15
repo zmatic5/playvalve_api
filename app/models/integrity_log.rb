@@ -1,5 +1,5 @@
 class IntegrityLog < ApplicationRecord
-  enumeration :ban_status, class_name: BanStatusEnumeration
+  include BanStatusable
 
-  validates :ban_status_id, presence: true
+  validates :ban_status, presence: true
 end
