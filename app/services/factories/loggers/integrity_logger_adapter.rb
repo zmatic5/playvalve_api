@@ -1,13 +1,12 @@
 module Factories
   module Loggers
     class IntegrityLoggerAdapter
-      def log(user)
+      def log(user:, ip:, country:, rooted_device:)
         IntegrityLogger.log(
           user: user,
-          ip: Current.ip,
-          country: Current.country,
-          rooted_device: Current.rooted_device,
-          vpn_data: Current.vpn_data
+          ip: ip,
+          country: country,
+          rooted_device: rooted_device
         )
       end
     end
