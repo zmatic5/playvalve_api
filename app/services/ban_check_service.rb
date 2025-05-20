@@ -33,7 +33,6 @@ class BanCheckService
     !whitelist.include?(country)
   end
 
-  #"104.196.25.155"
   def vpn_check?
     vpn_data = VpnApiClient.check(ip) || {}
     security = vpn_data["security"] || {}
