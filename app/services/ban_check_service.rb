@@ -7,45 +7,37 @@ class BanCheckService
   end
 
   def call
-    user = User.find_or_initialize_by(idfa: @idfa)
+    user = User.find_or_initialize_by(idfa: idfa)
 
-    if user.persisted? && user.ban_status == :banned
-      return user
-    end
+    return user if user.persisted? && user.banned?
 
-    banned = rooted_check? || country_check? || vpn_check?
-    old_status = user.ban_status
-
-    user.ban_status = banned ? :banned : :not_banned
+    user.ban_status = should_ban? ? :banned : :not_banned
     user.save!
-
-    if user.new_record? || old_status != user.ban_status
-      IntegrityLogger.log(
-        user: user,
-        ip: @ip,
-        rooted_device: @rooted_device,
-        country: @country,
-        vpn_data: @vpn_data
-      )
-    end
-
     user
   end
 
   private
 
+  attr_reader :ip, :country, :idfa, :rooted_device, :vpn_data
+
+  def should_ban?
+    rooted_check? || country_check? || vpn_check?
+  end
+
   def rooted_check?
-    @rooted_device
+    rooted_device
   end
 
   def country_check?
-    whitelist = RedisClient.instance.smembers('country_whitelist')
-    !whitelist.include?(@country)
+    whitelist = Rails.cache.fetch('country_whitelist') { [] }
+    !whitelist.include?(country)
   end
 
+  #"104.196.25.155"
   def vpn_check?
-    @vpn_data = VpnApiClient.check(@ip) || {}
-    security = @vpn_data["security"] || {}
+    vpn_data = VpnApiClient.check(ip) || {}
+    security = vpn_data["security"] || {}
     security["vpn"] || security["proxy"] || security["tor"]
+    Current.vpn_data = vpn_data
   end
 end

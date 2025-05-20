@@ -1,17 +1,14 @@
 class VpnApiClient
-  base_uri 'https://vpnapi.io/api'
+  BASE_URL = 'https://vpnapi.io/api'
 
   def self.check(ip)
-    cache_key = "vpnapi:#{ip}"
-    cached = RedisClient.instance.get(cache_key)
-    return JSON.parse(cached) if cached
-
-    response = get("/#{ip}?key=#{ENV['VPNAPI_KEY']}")
-    if response.success?
-      RedisClient.instance.setex(cache_key, 24.hours.to_i, response.body)
-      JSON.parse(response.body)
-    else
-      {}
+    Rails.cache.fetch("vpnapi:#{ip}", expires_in: 24.hours) do
+      response = HTTParty.get("#{BASE_URL}/#{ip}?key=#{ENV['VPNAPI_API_KEY']}")
+      if response.success?
+        JSON.parse(response.body)
+      else
+        {}
+      end
     end
   rescue => e
     Rails.logger.warn("VPN API check failed: #{e.message}")
