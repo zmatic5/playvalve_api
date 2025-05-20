@@ -9,7 +9,6 @@ class User < ApplicationRecord
   after_update :create_audit, if: :saved_change_to_ban_status?
 
   def create_audit
-    Rails.logger.info "Im here"
     ::Factories::AuditFactory.fetch(AUDIT_TYPE).log(self)
   end
 end
