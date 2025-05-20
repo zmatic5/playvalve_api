@@ -6,8 +6,8 @@ class IntegrityLogger
       ip: ip,
       rooted_device: rooted_device,
       country: country,
-      proxy: vpn_data&.dig("security", "proxy"),
-      vpn: vpn_data&.dig("security", "vpn")
+      proxy: vpn_data&.dig("proxy"),
+      vpn: vpn_data&.dig("vpn")
     )
   end
 end

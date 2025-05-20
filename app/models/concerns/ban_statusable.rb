@@ -3,7 +3,7 @@ module BanStatusable
 
   included do
     enum ban_status: {
-      not_banned: 'not_banned',
+      allowed: 'allowed',
       banned: 'banned'
     }
   end

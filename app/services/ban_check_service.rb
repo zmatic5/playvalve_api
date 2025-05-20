@@ -11,7 +11,7 @@ class BanCheckService
 
     return user if user.persisted? && user.banned?
 
-    user.ban_status = should_ban? ? :banned : :not_banned
+    user.ban_status = should_ban? ? :banned : :allowed
     user.save!
     user
   end
@@ -37,7 +37,7 @@ class BanCheckService
   def vpn_check?
     vpn_data = VpnApiClient.check(ip) || {}
     security = vpn_data["security"] || {}
+    Current.vpn_data = security
     security["vpn"] || security["proxy"] || security["tor"]
-    Current.vpn_data = vpn_data
   end
 end
