@@ -1,24 +1,59 @@
-# README
+# Playvalve API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This Rails API handles ban evaluation and integrity logging based on IDFA, VPN usage, device rooting, and country code. It uses a service-based architecture and is documented via Swagger.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+### Requirements
 
-* System dependencies
+- Docker
+- Docker Compose
+- `.env` file with VPNAPI key
 
-* Configuration
+### Getting Started
 
-* Database creation
+Build and run the app using Docker:
 
-* Database initialization
+```BASH
+docker-compose up --build
+```
 
-* How to run the test suite
+The API will be available at:
 
-* Services (job queues, cache servers, search engines, etc.)
+```BASH
+http://localhost:3000
+```
 
-* Deployment instructions
+Swagger documentation will be available at:
 
-* ...
+```BASH
+http://localhost:3000/api-docs
+```
+
+Environment Variables
+Create a .env file with the following:
+
+VPNAPI_API_KEY=your_api_key_here
+This key is required to use vpnapi.io for VPN detection. You can use .env.example.
+
+Testing
+To run the test suite:
+
+```BASH
+docker-compose exec web bundle exec rspec
+```
+
+Linting
+To run RuboCop:
+
+```BASH
+docker-compose exec web bundle exec rubocop
+```
+
+API Documentation
+Swagger
+
+```BASH
+http://localhost:3000/api-docs/index.html
+```
+or run with curl.
