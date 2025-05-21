@@ -40,12 +40,10 @@ RSpec.configure do |config|
     Rails.root.join('spec/fixtures')
   ]
 
-  RSpec.configure do |config|
-    config.include FactoryBot::Syntax::Methods
-  end
+  config.include FactoryBot::Syntax::Methods
 
-  Shoulda::Matchers.configure do |config|
-    config.integrate do |with|
+  Shoulda::Matchers.configure do |shoulda_config|
+    shoulda_config.integrate do |with|
       with.test_framework :rspec
       with.library :rails
     end
