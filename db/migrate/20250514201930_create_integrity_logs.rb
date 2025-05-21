@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateIntegrityLogs < ActiveRecord::Migration[7.1]
   def change
     create_table :integrity_logs do |t|

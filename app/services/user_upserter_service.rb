@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserUpserterService
   def initialize(user:, ban_status:)
     @user = user

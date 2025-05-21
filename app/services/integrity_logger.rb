@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IntegrityLogger
   def self.log(user:, ip:, rooted_device:, country:)
     IntegrityLog.create!(
@@ -6,8 +8,8 @@ class IntegrityLogger
       ip: ip,
       rooted_device: rooted_device,
       country: country,
-      proxy: Rails.cache.fetch("vpnapi:#{ip}")&.dig("security", "proxy"),
-      vpn: Rails.cache.fetch("vpnapi:#{ip}")&.dig("security", "vpn")
+      proxy: Rails.cache.fetch("vpnapi:#{ip}")&.dig('security', 'proxy'),
+      vpn: Rails.cache.fetch("vpnapi:#{ip}")&.dig('security', 'vpn')
     )
   end
 end

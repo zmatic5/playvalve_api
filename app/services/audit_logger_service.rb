@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuditLoggerService
   def initialize(user:, ip:, country:, rooted_device:, vpn_data:)
     @user = user

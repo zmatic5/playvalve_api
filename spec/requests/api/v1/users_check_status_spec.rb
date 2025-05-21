@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'User check_status API', type: :request do
@@ -23,7 +25,7 @@ RSpec.describe 'User check_status API', type: :request do
          headers: headers
 
     expect(response).to have_http_status(:ok)
-    expect(JSON.parse(response.body)).to have_key('ban_status')
+    expect(response.parsed_body).to have_key('ban_status')
   end
 
   it 'returns 400 when CF-IPCountry header is missing' do

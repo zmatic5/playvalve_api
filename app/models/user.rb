@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   AUDIT_TYPE = :integrity_logger
   include BanStatusable

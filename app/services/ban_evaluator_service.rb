@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BanEvaluatorService
   attr_reader :vpn_data
 
@@ -22,14 +24,14 @@ class BanEvaluatorService
 
   def country_check?
     whitelist = Rails.cache.fetch('country_whitelist') { [] }
-    !whitelist.map(&:upcase).include?(country.to_s.upcase)
+    whitelist.map(&:upcase).exclude?(country.to_s.upcase)
   end
 
   def vpn_check?
     response = VpnApiClient.check(ip)
     @vpn_data = response['security'] || {}
     @vpn_data['vpn'] || @vpn_data['proxy'] || @vpn_data['tor']
-  rescue
+  rescue StandardError
     false
   end
 end

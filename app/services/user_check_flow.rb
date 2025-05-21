@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserCheckFlow
   def initialize(idfa:, rooted_device:, ip:, country:)
     @idfa = idfa
@@ -30,7 +32,7 @@ class UserCheckFlow
           country: country,
           rooted_device: rooted_device
         )
-      rescue => e
+      rescue StandardError => e
         Rails.logger.error("Audit log failed: #{e.message}")
       end
     end

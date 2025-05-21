@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Factories
   class AuditFactory
     def self.fetch(type)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'net/http'
 require 'uri'
 require 'json'
@@ -10,15 +12,13 @@ class VpnApiClient
       response = request(ip)
       parse(response)
     end
-  rescue => e
+  rescue StandardError => e
     Rails.logger.warn("VPN API check failed for #{ip}: #{e.message}")
     {}
   end
 
-  private
-
   def self.request(ip)
-    uri = URI("#{BASE_URL}/#{ip}?key=#{ENV['VPNAPI_API_KEY']}")
+    uri = URI("#{BASE_URL}/#{ip}?key=#{ENV.fetch('VPNAPI_API_KEY', nil)}")
     Net::HTTP.get_response(uri)
   end
 
