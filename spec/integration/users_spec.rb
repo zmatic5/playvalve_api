@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'swagger_helper'
 
 RSpec.describe 'User Ban Check API', type: :request do
@@ -28,7 +30,7 @@ RSpec.describe 'User Ban Check API', type: :request do
                       example: false
                     }
                   },
-                  required: ['idfa', 'rooted_device']
+                  required: %w[idfa rooted_device]
                 }
 
       response(200, 'successful') do
