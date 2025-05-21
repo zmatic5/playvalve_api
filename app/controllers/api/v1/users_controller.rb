@@ -22,12 +22,12 @@ module Api
       private
 
       def require_country_header!
-        raise ActionController::BadRequest, "Missing CF-IPCountry header" if request.headers['CF-IPCountry'].blank?
+        raise ActionController::BadRequest, 'Missing CF-IPCountry header' if request.headers['CF-IPCountry'].blank?
       end
 
       def validate_idfa!(value)
         unless value.is_a?(String) && value.match?(/\A[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\z/i)
-          raise ActionController::BadRequest, "idfa must be a valid UUID"
+          raise ActionController::BadRequest, 'idfa must be a valid UUID'
         end
 
         value.downcase
@@ -35,10 +35,10 @@ module Api
 
       def validate_rooted_device!(value)
         case value
-        when true, "true" then true
-        when false, "false" then false
+        when true, 'true' then true
+        when false, 'false' then false
         else
-          raise ActionController::BadRequest, "rooted_device must be true or false"
+          raise ActionController::BadRequest, 'rooted_device must be true or false'
         end
       end
     end
