@@ -23,6 +23,7 @@ group :development, :test do
   gem "dotenv-rails"
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'rswag'
   gem "rubocop-rails-omakase", require: false
   gem 'shoulda-matchers', '~> 5.0'
 end
