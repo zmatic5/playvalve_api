@@ -30,30 +30,26 @@ Swagger documentation will be available at:
 http://localhost:3000/api-docs
 ```
 
-Environment Variables
+### Environment Variables
+
 Create a .env file with the following:
 
 VPNAPI_API_KEY=your_api_key_here
+
 This key is required to use vpnapi.io for VPN detection. You can use .env.example.
 
-Testing
+### Testing
+
 To run the test suite:
 
 ```BASH
 docker-compose exec web bundle exec rspec
 ```
 
-Linting
+###Linting
+
 To run RuboCop:
 
 ```BASH
 docker-compose exec web bundle exec rubocop
 ```
-
-API Documentation
-Swagger
-
-```BASH
-http://localhost:3000/api-docs/index.html
-```
-or run with curl.
