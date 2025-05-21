@@ -34,7 +34,9 @@ http://localhost:3000/api-docs
 
 Create a .env file with the following:
 
+```BASH
 VPNAPI_API_KEY=your_api_key_here
+```
 
 This key is required to use vpnapi.io for VPN detection. You can use .env.example.
 
