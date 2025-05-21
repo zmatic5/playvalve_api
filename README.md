@@ -46,7 +46,7 @@ To run the test suite:
 docker-compose exec web bundle exec rspec
 ```
 
-###Linting
+### Linting
 
 To run RuboCop:
 
