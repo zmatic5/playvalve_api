@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'pg', '~> 1.1'
 gem 'puma', '>= 5.0'
-gem 'rails', '~> 7.1.0'
+gem 'rails', '~> 8.0.2'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 gem 'bootsnap', require: false
